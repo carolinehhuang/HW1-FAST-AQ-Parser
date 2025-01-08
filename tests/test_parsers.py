@@ -33,7 +33,8 @@ def test_FastaParser():
     files that are blank or corrupted in some way. Two example Fasta files are
     provided in /tests/bad.fa and /tests/empty.fa
     """
-    pass
+    fasta_parser = FastaParser('bad.fa')
+    assert fasta_parser == ValueError(f"Got an empty line for fasta_parser @ line 1")
 
 
 def test_FastaFormat():
