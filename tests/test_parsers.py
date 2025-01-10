@@ -33,16 +33,35 @@ def test_FastaParser():
     files that are blank or corrupted in some way. Two example Fasta files are
     provided in /tests/bad.fa and /tests/empty.fa
     """
-    fasta_parser = FastaParser('bad.fa')
-    assert fasta_parser == ValueError(f"Got an empty line for fasta_parser @ line 1")
+    fasta_file = FastaParser('./bad.fa')
+    with pytest.raises(ValueError):
+        list(fasta_file)
+
+    fasta_file = FastaParser('./blank.fa')
+    with pytest.raises(ValueError):
+        list(fasta_file)
+
+    fasta_file = FastaParser('../data/test.fa')
+    fasta = list(fasta_file)
+    assert fasta[0][0] == "seq0"
+    assert fasta[0][1] == "TGATTGAATCTTTTGAGGGTCACGGCCCGGAAGCCAGAATTTCGGGGTCCTCTGTGGATATTAATCGAGCCCACACGGTGTGAGTTCAGCGGCCCCCGCA"
+
+
 
 
 def test_FastaFormat():
     """
-    Test to make sure that a fasta file is being read in if a fastq file is
+    Test to make sure that a fasta file is being read in. if a fastq file is
     read, the first item is None
     """
-    pass
+    fasta_true = FastaParser('../data/test.fa')
+    fasta = list(fasta_true)
+    assert fasta[0][0] is not None
+
+    fasta_false = FastaParser('../data/test.fq')
+    fastq = list(fasta_false)
+    assert fastq[0][0] is None
+
 
 
 def test_FastqParser():
@@ -51,11 +70,29 @@ def test_FastqParser():
     an instance of your FastqParser class and assert that it properly reads 
     in the example Fastq File.
     """
-    pass
+    fastq_file = FastqParser('./bad.fq')
+    with pytest.raises(ValueError):
+        list(fastq_file)
+
+    fastq_file = FastqParser('./blank.fq')
+    with pytest.raises(ValueError):
+        list(fastq_file)
+
+    fastq_file = FastqParser('../data/test.fq')
+    fastq = list(fastq_file)
+    assert fastq[0][0] == "seq0"
+    assert fastq[0][1] == "TGTGGTCGTATAGTTATTGTCATAAATTACACAGAATCGCGATTCTCCGCGTCCACCAATCTTAGTGCACCACAGCATCGACCCGATTTATGACGCTGAG"
+    assert fastq[0][2] == """*540($=*,=.062565,2>'487')!:&&6=,6,*7>:&132&83*8(58&59>'8!;28<94,0*;*.94**:9+7"94(>7='(!5"2/!%"4#32="""
 
 def test_FastqFormat():
     """
     Test to make sure fastq file is being read in. If this is a fasta file, the
     first line is None
     """
-    pass
+    fastq_true = FastqParser('../data/test.fq')
+    fastq = list(fastq_true)
+    assert fastq[0][0] is not None
+
+    fastq_false = FastqParser('../data/test.fa')
+    fasta = list(fastq_false)
+    assert fasta[0][0] is None

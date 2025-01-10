@@ -9,9 +9,9 @@ def main():
     The main function
     """
     # Create instance of FastaParser
-    fasta_parse = FastaParser('/Users/carolinehuang/HW1-FAST-AQ-Parser/data/test.fa')
+    fasta_parse = FastaParser('./data/test.fa')
     # Create instance of FastqParser
-    fastq_parse = FastqParser('/Users/carolinehuang/HW1-FAST-AQ-Parser/data/test.fq')
+    fastq_parse = FastqParser('./data/test.fq')
         
     # For each record of FastaParser, Transcribe the sequence
     # and print it to console

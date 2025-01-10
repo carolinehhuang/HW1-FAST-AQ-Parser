@@ -1,5 +1,5 @@
 # .github/workflows/app.yaml
-name: Project Tests
+name: HW1-FAST-AQ-PARSER
 on: push
 
 jobs:
