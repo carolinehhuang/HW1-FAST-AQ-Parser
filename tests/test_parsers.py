@@ -33,11 +33,11 @@ def test_FastaParser():
     files that are blank or corrupted in some way. Two example Fasta files are
     provided in /tests/bad.fa and /tests/empty.fa
     """
-    fasta_file = FastaParser('./bad.fa')
+    fasta_file = FastaParser('bad.fa')
     with pytest.raises(ValueError):
         list(fasta_file)
 
-    fasta_file = FastaParser('./blank.fa')
+    fasta_file = FastaParser('blank.fa')
     with pytest.raises(ValueError):
         list(fasta_file)
 
@@ -70,11 +70,11 @@ def test_FastqParser():
     an instance of your FastqParser class and assert that it properly reads 
     in the example Fastq File.
     """
-    fastq_file = FastqParser('./bad.fq')
+    fastq_file = FastqParser('bad.fq')
     with pytest.raises(ValueError):
         list(fastq_file)
 
-    fastq_file = FastqParser('./blank.fq')
+    fastq_file = FastqParser('blank.fq')
     with pytest.raises(ValueError):
         list(fastq_file)
 
